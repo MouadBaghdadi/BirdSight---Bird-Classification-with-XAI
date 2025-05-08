@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BirdSight - Bird Species Identifier</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <div class="app-container">
+    <header class="app-header">
+      <div class="logo">
+        <i class="fas fa-feather-alt"></i>
+        <h1>BirdSight</h1>
+      </div>
+      <p class="tagline">Identify birds with AI precision</p>
+    </header>
+
+    <main class="main-content">
+      <section class="upload-section">
+        <div class="card">
+          <h2><i class="fas fa-camera"></i> Upload Bird Image</h2>
+          <div class="image-preview-container">
+            <div id="image-preview">
+              <div id="upload-placeholder">
+                <i class="fas fa-bird"></i>
+                <p>Upload an image of a bird</p>
+              </div>
+              <img id="preview-img" src="/placeholder.svg" alt="Bird preview" style="display: none;">
+            </div>
+          </div>
+          
+          <div class="upload-controls">
+            <label for="image-upload" class="upload-btn">
+              <i class="fas fa-upload"></i> Choose Image
+              <input type="file" id="image-upload" accept="image/jpeg, image/png" hidden>
+            </label>
+            <button id="predict-btn" class="action-btn" disabled>
+              <i class="fas fa-search"></i> Identify Bird
+            </button>
+            <button id="clear-btn" class="secondary-btn" style="display: none;">
+              <i class="fas fa-trash"></i> Clear
+            </button>
+          </div>
+          
+          <div id="error-message" class="error-message" style="display: none;"></div>
+        </div>
+      </section>
+
+      <section id="results-section" class="results-section" style="display: none;">
+        <div class="results-container">
+          <div class="card result-card">
+            <h2><i class="fas fa-check-circle"></i> Identification Results</h2>
+            
+            <div class="result-details">
+              <div class="species-info">
+                <h3 id="species-name">Bird Species</h3>
+                <div id="life-stage-container" style="display: none;">
+                  <span class="label">Life Stage:</span>
+                  <span id="life-stage">Adult</span>
+                </div>
+              </div>
+              
+              <div class="confidence-container">
+                <div class="confidence-label">
+                  <span>Confidence:</span>
+                  <span id="confidence-value">95%</span>
+                </div>
+                <div class="confidence-bar-container">
+                  <div id="confidence-bar" class="confidence-bar"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card audio-card" id="audio-container" style="display: none;">
+            <h2><i class="fas fa-volume-up"></i> Bird Call</h2>
+            <p>Listen to this bird's call:</p>
+            <div class="audio-player">
+              <audio id="bird-audio" controls></audio>
+            </div>
+          </div>
+
+          <div class="card heatmap-card" id="heatmap-container" style="display: none;">
+            <h2><i class="fas fa-fire"></i> Visual Explanation</h2>
+            <p>Areas the AI focused on for identification:</p>
+            <div class="heatmap-image-container">
+              <img id="heatmap-image" src="/placeholder.svg" alt="AI attention heatmap">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div id="loading-overlay" class="loading-overlay" style="display: none;">
+        <div class="loading-spinner">
+          <i class="fas fa-spinner fa-spin"></i>
+        </div>
+        <p>Analyzing your bird image...</p>
+      </div>
+    </main>
+
+    <footer class="app-footer">
+      <p>BirdSight - Advanced Bird Species Identification</p>
+    </footer>
+  </div>
+
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
